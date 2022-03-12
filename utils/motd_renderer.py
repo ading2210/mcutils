@@ -192,6 +192,9 @@ class MCFont:
 class MOTDRenderer:
     def __init__(self, extracted_dir=os.path.dirname(__file__)+"/minecraft"):
         self.extracted_dir = extracted_dir
+        if not os.path.exists(extracted_dir):
+            extractor_obj = extractor.Extractor("1.18.2")
+            extracted_path = extractor_obj.extract_jar()
         #map color codes to rgb values
         self.colors = {
             "0": (0, 0, 0),
