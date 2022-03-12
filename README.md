@@ -58,10 +58,11 @@ print(stats)
 
 ### motd_renderer.py
 Generate a nearly pixel-perfect image of what a server would look line in the client's server list.
+You need to have Pillow installed for this to work (`pip3 install Pillow`).
 ```python
 from utils import motd_renderer
 
-#query the local server
+#render an image of the server's motd and icon
 
 renderer = motd_renderer.MOTDRenderer()
 image = renderer.get_full_image(title="Hypixel", address=("mc.hypixel.net", 25565))
