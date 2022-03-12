@@ -79,8 +79,3 @@ class RCON:
             self.login()
             returned_packet = send_recieve_packet(self.sock, 1, 2, command.encode())
         return returned_packet[3].decode()
-
-if __name__ == "__main__":
-    rcon = RCON(host, port, "password")
-    print(rcon.send_cmd("help"))
-    rcon.close()

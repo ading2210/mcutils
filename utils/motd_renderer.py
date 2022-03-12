@@ -461,8 +461,3 @@ class MOTDRenderer:
             self.draw_text(image, (player_count_start, 6), player_count_parsed, force_unicode=force_unicode)
 
         return image
-
-if __name__ == "__main__":
-    renderer = MOTDRenderer()
-    image = renderer.get_full_image(title="Hypixel", address=("mc.hypixel.net", 25565))
-    image.save("/tmp/img.png", "PNG")
