@@ -68,4 +68,5 @@ image = renderer.get_full_image(title="Hypixel", address=("mc.hypixel.net", 2556
 image.save("/tmp/img.png", "PNG")
 ```
 Generated image:
+
 ![example of a generated image](https://raw.githubusercontent.com/ading2210/mcutils/main/images/motd.png)
