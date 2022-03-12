@@ -24,6 +24,8 @@ from utils import rcon
 #send a command to the local server
 
 rcon = rcon.RCON("127.0.0.1", 25575, "password")
+
+#returns a string with the command's output
 output = rcon.send_cmd("list")
 print(output)
 
@@ -38,6 +40,8 @@ from utils import query
 #query the local server
 
 query_obj = query.Query(("127.0.0.1", 25565))
+
+#retuns a dict with some stats
 full_stat = query_obj.full_stat()
 basic_stat = query_obj.basic_stat()
 
@@ -52,7 +56,10 @@ from utils import ping
 #ping the local server
 
 pinger = ping.Pinger(("127.0.0.1", 25565))
+
+#retuns a dict with some stats
 stats = pinger.ping()
+
 print(stats)
 ```
 
@@ -62,11 +69,14 @@ You need to have Pillow installed for this to work (`pip3 install Pillow`).
 ```python
 from utils import motd_renderer
 
-#render an image of the server's motd and icon
+#renders an image of the server's motd and icon
 
 renderer = motd_renderer.MOTDRenderer()
+
+#returns a PIL image object
 image = renderer.get_full_image(title="Hypixel", address=("mc.hypixel.net", 25565))
 image.save("/tmp/img.png", "PNG")
+
 ```
 Generated image:
 
