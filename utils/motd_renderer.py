@@ -399,7 +399,7 @@ class MOTDRenderer:
                 image_base64 = stats["favicon"].replace("data:image/png;base64,", "", 1)
                 image_data = BytesIO(base64.b64decode(image_base64, validate=True))
                 thumbnail = Image.open(image_data)
-        except socket.gaierror:
+        except (socket.gaierror, socket.timeout, ConnectionRefusedError) as e:
             pass
         finally:
             if stats == None or not "favicon" in stats:
@@ -412,16 +412,20 @@ class MOTDRenderer:
     #returns a PIL image object
     def get_full_image(self, title="A Minecraft Server", address=("127.0.0.1", 25565), force_unicode=False, status=None):
         stats = None
+        thumbnail = None
         try:
             stats = self.ping_server(address)
             motd_raw = stats["description"]
+            thumbnail = self.get_thumbnail(stats=stats, address=address)
         except socket.gaierror:
             motd_raw = "§4Can't resolve hostname"
         except (socket.timeout, ConnectionRefusedError) as e:
             motd_raw = "§4Can't connect to server"
         motd_parsed = self.parse_text(motd_raw)
 
-        thumbnail = self.get_thumbnail(stats=stats, address=address)
+        if thumbnail == None:
+            thumbnail = self.get_thumbnail(stats={}, address=address)
+        
         image = Image.new("RGB", (610, 72))
         drawer = ImageDraw.Draw(image)
         
